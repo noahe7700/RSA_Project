@@ -2,7 +2,7 @@
 RSA Algorithm implementation for EECE4632.
 
 ## Overview:
-My project for EECE4632 is implementing an RSA encryption algorithm on the Zynq board. The final result will feed values into an Overlay that computes the decryption and encryption of the FPGA. 
+My project for EECE4632 is implementing an RSA encryption algorithm on the Zynq board. The final result will feed values into an Overlay that computes the decryption and encryption of data on the FPGA. 
 
 
 ## Repository info:
