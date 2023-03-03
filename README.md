@@ -10,9 +10,9 @@ There are currently 3 main folders:
  - HLS Source Code holds the cpp files used in HLS and any .tcl, .hwh, or .bit files used for the overlay.
  - Jupyter Notebooks holds all the notebooks where the algorithm is tested on the Zynq board.
  - Python Code holds all the python code I developed offline (w/o Zynq) to help develop the project. Note: most of these files are just rougher versions of the notebooks in the Jupyter folder.
-## Updates:
+## Updates/Notes:
 
-### 3/2 Update 1
+### 3/2 Update
   
 **Jupyter Notebook/Software Updates**
 
