@@ -39,3 +39,8 @@ There are currently 3 main folders:
   Lastly, I will work on optimizing the hardware. Optimization will still occur while developing the source code since it will save time on regenerating the bitstream, but testing different solutions will likely come after. This is because I want to ensure everything is working before moving onto the optimization. While optimizing, I will perform similar changes to the directives as done in HW6, and will produce a pareto graph with the results. My final version will use the best optimization based on both the needs of the implementation (faster/smaller) and the results of the pareto. 
   
   For my next update, I want to have the Overlay working with examples of its use. To demonstrate and test the overlay, I will perform either an encryption or decryption in software and have the PL perform the inverse to see if the correct value is returned. This will help troubleshoot the code when testing. Additionally, I want to explore ways I could send a set of prime numbers to the hardware for it to generate the keys if time permits. 
+
+### 3/20 Brief:
+
+**HLS Code Started**
+
