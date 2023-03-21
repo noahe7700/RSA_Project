@@ -42,5 +42,8 @@ There are currently 3 main folders:
 
 ### 3/20 Brief:
 
-**HLS Code Started**
+**HLS Code Started and Tested**
 
+The C++ code for implementing the RSA algorithm was started at the time of the first update. Since then, I have tested the various functions such as generate_keys, inv_mod, mod_exp, gcd, and encryption using a test bench. Furthermore, I added the top level function for the AXI stream version that reads inputs, computes keys, and encrypts the message. This is being tested by the test bench using the values from the "hello world" example on Jupyter. 
+
+The code was able to be synthesized and exported as RTL, however there was a lot of warnings related to scheduling that caused the function to fail at pipelining. This is likely the root of the issues that was preventing the block diagram from generating a bit stream. My plan to resolve this issue is to review the data types and functions to ensure they are compliant with the board. 
