@@ -62,6 +62,7 @@ uint1024_t inv_mod(uint1024_t a, uint1024_t m){
 }
 */
 //No longer needed for this version
+/*
 uint1024_t inv_mod(uint1024_t a, uint1024_t m){
 
     a = a % m;
@@ -72,7 +73,7 @@ uint1024_t inv_mod(uint1024_t a, uint1024_t m){
     return -1;
 
 }
-
+*/
 uint1024_t gcd(uint1024_t a, uint1024_t b){
 	while(b!=0){
 		uint1024_t t =b;
