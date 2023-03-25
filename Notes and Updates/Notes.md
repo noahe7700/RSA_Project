@@ -47,3 +47,11 @@ There are currently 3 main folders:
 The C++ code for implementing the RSA algorithm was started at the time of the first update. Since then, I have tested the various functions such as generate_keys, inv_mod, mod_exp, gcd, and encryption using a test bench. Furthermore, I added the top level function for the AXI stream version that reads inputs, computes keys, and encrypts the message. This is being tested by the test bench using the values from the "hello world" example on Jupyter. 
 
 The code was able to be synthesized and exported as RTL, however there was a lot of warnings related to scheduling that caused the function to fail at pipelining. This is likely the root of the issues that was preventing the block diagram from generating a bit stream. My plan to resolve this issue is to review the data types and functions to ensure they are compliant with the board. 
+
+### 3/22 Brief:
+
+**Testing Simplified HLS Code with Overlay**
+
+The result of the bitstream generation failing highlighted the problems with the complex recursion done in this algorithm. Functions such as the key generator require other functions like the modular inverse (private key) and iterating to find a good value for the public key. In this siplified version, the key generator function is removed from the top function and the key values given in the code. 
+
+The code was further modified to reduce the area since the LUT count was way too large (67k). Modifications included moving the modular exponential function into the top function and testing different data sizes to find the optimal size for area while still functioning. There was a trade-off between the data sizes where when a smaller size was used, the returned value was inaccurate. As a result, the best size was found to be using a mix of 128bit and 65 bit variables. This allowed the size to be reduced by 50% while retaining functionality.
