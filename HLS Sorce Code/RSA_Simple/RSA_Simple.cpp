@@ -170,13 +170,7 @@ void encrypt (hls::stream<AXI_VAL>& dataIn, hls::stream<AXI_VAL>& dataOut) {
 				a = (a * a) % n;
 
 			}
-		cipher.data = res;
-		cipher.keep = plain.keep;
-		cipher.strb = plain.strb;
-		cipher.user = plain.user;
-		cipher.last = plain.last;
-		cipher.id = plain.id;
-		cipher.dest = plain.dest;
+
 		dataOut.write(cipher); //After performing the encryption, the output stores the cipher
 
 		if(plain.last){
