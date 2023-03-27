@@ -60,4 +60,7 @@ The code was further modified to reduce the area since the LUT count was way too
 
 **Fixing the LUT size**
 
-When starting, I found that regardless of the changes in data size or organization of the code, the resulting synthesis still had an exceedingly large value for the LUT and FFs. The only solution I found so far to reduce the size to an appropriate value was to edit the settings and prevent it from pipelining.
+When starting, I found that regardless of the changes in data size or organization of the code, the resulting synthesis still had an exceedingly large value for the LUT and FFs. The only solution I found so far to reduce the size to an appropriate value was to edit the settings and prevent it from pipelining. This resolved the issue I was facing and allowed me to move to vivado and generate the bitstream for the overlay.
+
+More issues unfortunately arose after the bitstream generation, primarily related to the axi stream. On SW, the function to recieve the output was frequently returned with the error "DMA channel not idle". When it did work, the resulting array was 0s. This is therefore the next obstacle to resolve.
+
