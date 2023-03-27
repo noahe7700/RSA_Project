@@ -55,3 +55,9 @@ The code was able to be synthesized and exported as RTL, however there was a lot
 The result of the bitstream generation failing highlighted the problems with the complex recursion done in this algorithm. Functions such as the key generator require other functions like the modular inverse (private key) and iterating to find a good value for the public key. In this siplified version, the key generator function is removed from the top function and the key values given in the code. 
 
 The code was further modified to reduce the area since the LUT count was way too large (67k). Modifications included moving the modular exponential function into the top function and testing different data sizes to find the optimal size for area while still functioning. There was a trade-off between the data sizes where when a smaller size was used, the returned value was inaccurate. As a result, the best size was found to be using a mix of 128bit and 65 bit variables. This allowed the size to be reduced by 50% while retaining functionality.
+
+### 3/27 Brief:
+
+**Fixing the LUT size**
+
+When starting, I found that regardless of the changes in data size or organization of the code, the resulting synthesis still had an exceedingly large value for the LUT and FFs. The only solution I found so far to reduce the size to an appropriate value was to edit the settings and prevent it from pipelining.
