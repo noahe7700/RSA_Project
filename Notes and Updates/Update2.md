@@ -16,6 +16,7 @@ Vivado:
 - The Vivado project is located in the folder **Project Zip Files** with the name project_RSA2.zip.
 
 Other:
+- To quickly confirm this works (or worked if there are issues), please see the validation images in this folder. These images show the results are outputting accurate encrypted values that can be decrypted and read.
 - The DMA channel can sometimes run into issues. If there is a problem while running the Jupyter notebook, try rerunning the previous functions before runKernel().
 - For more information on the direction and steps done during this update, please see the Notes.md file with more specific updates.
 
