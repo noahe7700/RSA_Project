@@ -16,12 +16,12 @@ typedef ap_axis<32,1,1,1> AXI_VAL;
 typedef int data_t;
 typedef int	coef_t;
 typedef int	acc_t;
-typedef ap_uint<32> uint65_t;
-//typedef ap_uint<64> uint64_t;
-typedef ap_uint<512> uint512_t;
+typedef ap_uint<64> uint65_t; // Can be changed to allow for different RSA encryption sizes
+
+typedef ap_uint<512> uint512_t; // Used for testing larger RSA encryption sizes
 typedef ap_uint<1024> uint1024_t;
 
-typedef ap_fixed<64, 32, AP_RND_CONV, AP_SAT> fixed_t;
+
 /*
 uint1024_t inv_mod(uint1024_t a, uint1024_t m){
 	uint1024_t m0 = m;
@@ -106,14 +106,6 @@ void generate_key(int prime1, int prime2, uint65_t& n, uint65_t& e, uint65_t& d)
 
 }
 
-void rsa_encrypt(uint65_t n, uint65_t e, AXI_VAL plain, AXI_VAL& cipher){
-	uint65_t plainVal = plain.data.to_int();
-	cipher.data = mod_exp(plainVal, e, n);
-}
-
-void rsa_decrypt(uint65_t n, uint65_t d, uint65_t cipher, uint65_t& plain){
-	plain = mod_exp(cipher, d, n);
-}
 void encrypt (hls::stream<AXI_VAL>& dataIn, hls::stream<AXI_VAL>& dataOut, int prime1, int prime2, bool ende) {
 #pragma HLS INTERFACE ap_ctrl_none port=return
 #pragma HLS INTERFACE axis port=dataIn
@@ -132,39 +124,31 @@ void encrypt (hls::stream<AXI_VAL>& dataIn, hls::stream<AXI_VAL>& dataOut, int p
 	uint65_t res;
 	uint65_t a;
 
-	//p = p1.data.to_int();
-	//q = q1.data.to_int();
 	generate_key(prime1, prime2, n, e, d); // Gets the values for the keys using prime numbers in the function.
-	uint65_t nStat = n;
-	uint65_t eStat = e;
-	uint65_t dStat = d;
-	while(1){
+
+	uint65_t nStat = n; // Static value to reset n in stream loop
+	if(ende == 1){
+			eStat = d;
+		}
+		else {
+			eStat =e;
+		}
+	while(1){ // AXI Stream loop
 		dataIn.read(plain); // Sets the plain to the value read
 
 		n = nStat;
 		e = eStat;
 		d = dStat;
 
-		//cipher.data = mod_exp(plain.data.to_int(), e, n);
-
 		res = 1;
-
 		a = plain.data.to_int();
-
 		a = a%n;
-		// Using ende boolean, determine if encrypt or decrypt is passed
-		if(ende == 1){
-			e = d;
-		}
-		else {
-			e =e;
-		}
+
 		while (e > 0){
 				if(e & 1)
 					res = (res * a) % n;
 				e = e >> 1;
 				a = (a * a) % n;
-
 			}
 		cipher.data = res;
 		cipher.keep = plain.keep;
@@ -176,11 +160,9 @@ void encrypt (hls::stream<AXI_VAL>& dataIn, hls::stream<AXI_VAL>& dataOut, int p
 		dataOut.write(cipher); //After performing the encryption, the output stores the cipher
 
 		if(plain.last){
-
 			break;
 		}
 	}
-
 }
 
 
